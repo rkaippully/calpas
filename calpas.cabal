@@ -1,0 +1,77 @@
+cabal-version:       2.4
+name:                calpas
+version:             0.1.0
+synopsis:            A compiler and VM for Pascal Programming Language
+description:         Calpas is a compiler and virtual machine for Pascal 1974 with some extensions.
+homepage:            https://github.com/rkaippully/calpas#readme
+bug-reports:         https://github.com/rkaippully/calpas/issues
+author:              Raghu Kaippully
+maintainer:          rkaippully@gmail.com
+copyright:           2020 Raghu Kaippully
+license:             MPL-2.0
+license-file:        LICENSE
+category:            Language, Compilers/Interpreters
+build-type:          Simple
+extra-source-files:  README.md
+                     ChangeLog.md
+
+
+source-repository head
+  type:      git
+  location:  https://github.com/rkaippully/calpas
+
+
+common common-settings
+  default-language:   Haskell2010
+  default-extensions: OverloadedStrings
+  build-depends:      base                  ==4.13.0.0
+                    , case-insensitive      ==1.2.1.0
+                    , text                  ==1.2.4.0
+  ghc-options:        -Wall
+                      -Wincomplete-record-updates
+                      -Wincomplete-uni-patterns
+                      -Wredundant-constraints
+                      -fwrite-ide-info
+                      -hiedir=.hie
+
+executable calpasc
+  import:             common-settings
+  main-is:            Main.hs
+  other-modules:      Calpas.Compiler.Parser
+  hs-source-dirs:     compiler
+  other-modules:      Paths_calpas
+  autogen-modules:    Paths_calpas
+  ghc-options:        -threaded
+                      -rtsopts
+                      -with-rtsopts=-N
+  build-depends:      megaparsec ==8.0.0
+
+test-suite calpasc-test
+  import:             common-settings
+  type:               exitcode-stdio-1.0
+  main-is:            Main.hs
+  hs-source-dirs:     compiler-test
+  ghc-options:        -threaded
+                      -rtsopts
+                      -with-rtsopts=-N
+  build-depends:      tasty                 ==1.2.3
+
+executable calpas
+  import:             common-settings
+  main-is:            Main.hs
+  hs-source-dirs:     vm
+  other-modules:      Paths_calpas
+  autogen-modules:    Paths_calpas
+  ghc-options:        -threaded
+                      -rtsopts
+                      -with-rtsopts=-N
+
+test-suite calpas-test
+  import:             common-settings
+  type:               exitcode-stdio-1.0
+  main-is:            Main.hs
+  hs-source-dirs:     vm-test
+  ghc-options:        -threaded
+                      -rtsopts
+                      -with-rtsopts=-N
+  build-depends:      tasty                 ==1.2.3
