@@ -20,9 +20,6 @@ jobs:
         ghc:
           - 8.8.4
 
-    env:
-      CONFIG: --system-ghc --stack-root=${{ github.workspace }}/.stack
-
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v2
@@ -47,7 +44,11 @@ jobs:
           rm -rf ~/.stack/setup-exe-src ~/.stack/setup-exe-cache
 
       - name: Build
-        run: stack $CONFIG build --test --bench --no-run-tests --no-run-benchmarks
+        env:
+          STACK_ROOT: ${{ github.workspace }}/.stack
+        run: stack --system-ghc build --test --bench --no-run-tests --no-run-benchmarks
 
       - name: Test
-        run: stack $CONFIG test
+        env:
+          STACK_ROOT: ${{ github.workspace }}/.stack
+        run: stack --system-ghc test
