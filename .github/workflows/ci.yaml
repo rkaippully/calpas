@@ -20,6 +20,9 @@ jobs:
         ghc:
           - 8.8.4
 
+    env:
+      STACK_ROOT: .stack
+
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v2
@@ -34,9 +37,8 @@ jobs:
         uses: actions/cache@v2
         with:
           path: |
-            ~/.stack
-            ${{ steps.setup-haskell-cabal.outputs.cabal-store }}
-          key: ${{ runner.os }}-stack-${{ hashFiles('stack.yaml') }}
+            .stack
+          key: stack-${{ runner.os }}-${{ matrix.ghc }}-${{ hashFiles('stack.yaml') }}
 
       - name: Clean Cache
         if: ${{ runner.os == 'macOS' }}
