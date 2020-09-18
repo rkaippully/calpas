@@ -7,8 +7,8 @@ on:
     branches: [master]
 
 jobs:
-  stack-build:
-    name: Stack - os-${{ matrix.os }}
+  cabal-build:
+    name: Cabal - os-${{ matrix.os }}
 
     runs-on: ${{ matrix.os }}
     strategy:
@@ -20,6 +20,9 @@ jobs:
         ghc:
           - 8.8.4
 
+    env:
+      CONFIG: "--enable-tests --enable-benchmarks"
+
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v2
@@ -27,28 +30,24 @@ jobs:
       - name: Setup Haskell Build Environment
         uses: actions/setup-haskell@v1.1
         with:
-          ghc-version: 8.8.4
-          enable-stack: true
+          ghc-version: ${{ matrix.ghc }}
 
-      - name: Cache dependencies
+      - name: Cabal Update
+        run: cabal update $CONFIG
+
+      - name: Cabal Freeze
+        run: cabal freeze $CONFIG
+
+      - name: Cache Dependencies
         uses: actions/cache@v2
         with:
           path: |
-            ~/.stack
             ${{ steps.setup-haskell-cabal.outputs.cabal-store }}
-          key: ${{ runner.os }}-stack-${{ hashFiles('stack.yaml') }}
-
-      - name: Clean Cache
-        if: ${{ runner.os == 'macOS' }}
-        run: |
-          # Workaround for random errors on macos
-          rm -rf ~/.stack/setup-exe-src ~/.stack/setup-exe-cache
+            dist-newstyle
+          key: cabal-${{ runner.os }}-${{ matrix.ghc }}-${{ hashFiles('cabal.project.freeze') }}
 
       - name: Build
-        run: stack build --system-ghc --test --bench --no-run-tests --no-run-benchmarks
+        run: cabal build $CONFIG
 
       - name: Test
-        run: stack test --system-ghc --ta '--quickcheck-tests 100000'
-
-      - name: Prepare sdist
-        run: stack sdist --system-ghc
+        run: cabal test $CONFIG
