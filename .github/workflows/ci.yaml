@@ -21,29 +21,32 @@ jobs:
           - 8.8.4
 
     steps:
-      - uses: actions/checkout@v2
-        name: Checkout Source Code
+      - name: Checkout Source Code
+        uses: actions/checkout@v2
 
-      - uses: actions/setup-haskell@v1.1
-        name: Setup Haskell Build Environment
+      - name: Setup Haskell Build Environment
+        uses: actions/setup-haskell@v1.1
         with:
           ghc-version: 8.8.4
           enable-stack: true
 
-      - uses: actions/cache@v2
-        name: Cache dependencies
+      - name: Cache dependencies
+        uses: actions/cache@v2
         with:
           path: ~/.stack
           key: ${{ runner.os }}-stack-${{ hashFiles('stack.yaml') }}
 
-      - name: Build
+      - name: Clean Cache
+        if: ${{ runner.os == 'macOS' }}
         run: |
           # Workaround for random errors on macos
           rm -rf ~/.stack/setup-exe-src ~/.stack/setup-exe-cache
-          stack build --system-ghc --test --bench --no-run-tests --no-run-benchmarks
+
+      - name: Build
+        run: stack build --system-ghc --test --bench --no-run-tests --no-run-benchmarks
 
       - name: Test
         run: stack test --system-ghc --ta '--quickcheck-tests 100000'
 
-      - name : Prepare sdist
+      - name: Prepare sdist
         run: stack sdist --system-ghc
