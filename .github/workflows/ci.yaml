@@ -21,7 +21,7 @@ jobs:
           - 8.8.4
 
     env:
-      STACK_ROOT: ${{ env.GITHUB_WORKSPACE }}/.stack
+      STACK_ROOT: ${{ github.workspace }}/.stack
 
     steps:
       - name: Checkout Source Code
