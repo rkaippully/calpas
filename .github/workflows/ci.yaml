@@ -33,15 +33,16 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
-          path: |
-            .stack
-          key: stack-${{ runner.os }}-${{ matrix.ghc }}-${{ hashFiles('stack.yaml') }}
+          path: .stack
+          key: ${{ runner.os }}-${{ matrix.ghc }}-${{ hashFiles('stack.yaml') }}
 
       - name: Clean Cache
         if: ${{ runner.os == 'macOS' }}
+        env:
+          STACK_ROOT: ${{ github.workspace }}/.stack
         run: |
           # Workaround for random errors on macos
-          rm -rf ~/.stack/setup-exe-src ~/.stack/setup-exe-cache
+          rm -rf $STACK_ROOT/setup-exe-src $STACK_ROOT/setup-exe-cache
 
       - name: Build
         env:
