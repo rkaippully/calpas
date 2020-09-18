@@ -21,7 +21,7 @@ jobs:
           - 8.8.4
 
     env:
-      STACK_CONFIG: --system-ghc --stack-root=${{ github.workspace }}/.stack
+      CONFIG: --system-ghc --stack-root=${{ github.workspace }}/.stack
 
     steps:
       - name: Checkout Source Code
@@ -47,7 +47,7 @@ jobs:
           rm -rf ~/.stack/setup-exe-src ~/.stack/setup-exe-cache
 
       - name: Build
-        run: stack $STACK_CONFIG build --test --bench --no-run-tests --no-run-benchmarks
+        run: stack $CONFIG build --test --bench --no-run-tests --no-run-benchmarks
 
       - name: Test
-        run: stack $STACK_CONFIG test
+        run: stack $CONFIG test
