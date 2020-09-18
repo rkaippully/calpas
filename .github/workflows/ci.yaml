@@ -47,7 +47,7 @@ jobs:
           rm -rf ~/.stack/setup-exe-src ~/.stack/setup-exe-cache
 
       - name: Build
-        run: stack build $STACK_CONFIG --test --bench --no-run-tests --no-run-benchmarks
+        run: stack $STACK_CONFIG build --test --bench --no-run-tests --no-run-benchmarks
 
       - name: Test
-        run: stack test $STACK_CONFIG
+        run: stack $STACK_CONFIG test
