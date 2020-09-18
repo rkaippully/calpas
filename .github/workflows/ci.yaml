@@ -21,7 +21,7 @@ jobs:
           - 8.8.4
 
     env:
-      STACK_ROOT: ${{ github.workspace }}/.stack
+      STACK_CONFIG: --system-ghc --stack-root=${{ github.workspace }}/.stack
 
     steps:
       - name: Checkout Source Code
@@ -47,10 +47,7 @@ jobs:
           rm -rf ~/.stack/setup-exe-src ~/.stack/setup-exe-cache
 
       - name: Build
-        run: stack build --system-ghc --test --bench --no-run-tests --no-run-benchmarks
+        run: stack build $STACK_CONFIG --test --bench --no-run-tests --no-run-benchmarks
 
       - name: Test
-        run: stack test --system-ghc --ta '--quickcheck-tests 100000'
-
-      - name: Prepare sdist
-        run: stack sdist --system-ghc
+        run: stack test $STACK_CONFIG
