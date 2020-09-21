@@ -1,3 +1,5 @@
 .stack-work/
 .hie/
 *~
+
+compiler-test/data/golden/*.output
