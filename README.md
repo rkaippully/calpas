@@ -13,3 +13,10 @@ Pascal programs to virtual machine p-code. The Calpas VM executes this p-code to
 $ calpasc -o test.cpc test.pas    # Compile to p-code
 $ calpas test.cpc                 # Run a program
 ```
+
+## Changes from Standard
+
+- Supports `(* *)` and `/* */` style comments
+- Record field lists can be empty and can have trailing semicolon for the field list before "end"
+- Case list elements can have a trailing semicolon before "end"
+- Procedures and functions as parameters are not supported
