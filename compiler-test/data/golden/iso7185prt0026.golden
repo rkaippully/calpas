@@ -1,0 +1,6 @@
+compiler-test/data/golden/iso7185prt0026.pas:9:14:
+  |
+9 | type  integer;
+  |              ^
+unexpected ';'
+expecting '='

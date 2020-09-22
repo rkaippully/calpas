@@ -1,0 +1,6 @@
+compiler-test/data/golden/iso7185prt0040.pas:11:1:
+   |
+11 | type  integer = char;
+   | ^^^^^
+unexpected "type "
+expecting "begin", "function", or "procedure"

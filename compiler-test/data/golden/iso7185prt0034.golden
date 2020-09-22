@@ -1,0 +1,6 @@
+compiler-test/data/golden/iso7185prt0034.pas:9:5:
+  |
+9 | var , two: integer;
+  |     ^
+unexpected ','
+expecting identifier

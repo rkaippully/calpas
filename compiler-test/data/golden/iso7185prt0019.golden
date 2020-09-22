@@ -1,0 +1,6 @@
+compiler-test/data/golden/iso7185prt0019.pas:9:10:
+  |
+9 | const one;
+  |          ^
+unexpected ';'
+expecting '='

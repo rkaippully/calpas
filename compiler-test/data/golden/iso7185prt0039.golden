@@ -1,0 +1,6 @@
+compiler-test/data/golden/iso7185prt0039.pas:10:6:
+   |
+10 |      two: integer;
+   |      ^
+unexpected 't'
+expecting ';'

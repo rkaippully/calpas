@@ -1,0 +1,6 @@
+compiler-test/data/golden/iso7185prt0031.pas:11:1:
+   |
+11 | const one = 1;
+   | ^^^^^
+unexpected "const"
+expecting "begin", "function", "procedure", or "var"

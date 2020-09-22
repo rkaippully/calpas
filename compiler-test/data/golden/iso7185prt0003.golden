@@ -1,0 +1,6 @@
+compiler-test/data/golden/iso7185prt0003.pas:7:8:
+  |
+7 | program;
+  |        ^
+unexpected ';'
+expecting identifier
