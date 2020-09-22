@@ -1,0 +1,6 @@
+compiler-test/data/golden/iso7185prt0038.pas:10:9:
+   |
+10 |      two;
+   |         ^
+unexpected ';'
+expecting ',' or ':'

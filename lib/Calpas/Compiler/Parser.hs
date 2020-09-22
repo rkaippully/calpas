@@ -436,8 +436,8 @@ reservedWords = [ "div", "mod", "nil", "in", "if", "then", "else", "case", "of"
 identifier :: Parser Identifier
 identifier = label "identifier" $ try $
   Identifier <$> do
-    c <- satisfy (\c -> isAscii c && isAlpha c) <?> "letter"
-    cs <- takeWhileP (Just "letter or digit") (\ch -> isAscii ch && isAlphaNum ch)
+    c <- hidden $ satisfy (\c -> isAscii c && isAlpha c)
+    cs <- hidden $ takeWhileP Nothing (\ch -> isAscii ch && isAlphaNum ch)
 
     let name = mk $ c `cons` cs
     when (name `member` reservedWords) empty

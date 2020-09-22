@@ -1,0 +1,6 @@
+compiler-test/data/golden/iso7185prt0006.pas:10:4:
+   |
+10 | end
+   |    ^
+unexpected end of input
+expecting '.'

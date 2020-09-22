@@ -1,0 +1,6 @@
+compiler-test/data/golden/iso7185prt0014.pas:11:1:
+   |
+11 | begin
+   | ^
+unexpected 'b'
+expecting ',' or ';'

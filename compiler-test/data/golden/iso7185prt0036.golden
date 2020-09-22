@@ -1,0 +1,6 @@
+compiler-test/data/golden/iso7185prt0036.pas:9:9:
+  |
+9 | var one integer;
+  |         ^
+unexpected 'i'
+expecting ',' or ':'

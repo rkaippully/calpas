@@ -1,0 +1,6 @@
+compiler-test/data/golden/iso7185prt0016.pas:9:9:
+  |
+9 | label 1,;
+  |         ^
+unexpected ';'
+expecting integer
