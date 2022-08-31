@@ -29,6 +29,8 @@
               ${ghcVersion} = prev.haskell.packages.${ghcVersion}.override {
                 overrides = hfinal: hprev: {
                   ${pkgName} = hfinal.callCabal2nix pkgName (gitignore.lib.gitignoreSource ./.) {};
+                  doctest = hfinal.callPackage ./nix/haskell-packages/doctest-0.20.0.nix {};
+                  relude = hfinal.callPackage ./nix/haskell-packages/relude-1.1.0.0.nix {};
                 };
               };
             };

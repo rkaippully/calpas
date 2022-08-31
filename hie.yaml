@@ -1,0 +1,22 @@
+cradle:
+  multi:
+    - path: "./compiler"
+      config:
+        cradle:
+          stack:
+            component: "calpas:exe:calpasc"
+    - path: "./compiler-test"
+      config:
+        cradle:
+          stack:
+            component: "calpas:calpasc-test"
+    - path: "./vm"
+      config:
+        cradle:
+          stack:
+            component: "calpas:exe:calpas"
+    - path: "./vm-test"
+      config:
+        cradle:
+          stack:
+            component: "calpas:calpas-test"

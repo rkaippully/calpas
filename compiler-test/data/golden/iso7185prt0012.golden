@@ -1,0 +1,6 @@
+compiler-test/data/golden/iso7185prt0012.pas:7:24:
+  |
+7 | program iso7185prt0012;;
+  |                        ^^
+unexpected ";<newline><newline>be"
+expecting "begin", "const", "function", "label", "procedure", "type", or "var"

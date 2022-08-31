@@ -1,0 +1,6 @@
+compiler-test/data/golden/iso7185prt0002.pas:7:1:
+  |
+7 | iso7185prt0002
+  | ^^^^^
+unexpected "iso71"
+expecting "begin", "const", "function", "label", "procedure", "program", "type", or "var"

@@ -1,0 +1,6 @@
+compiler-test/data/golden/iso7185prt0015.pas:10:7:
+   |
+10 | label one;
+   |       ^
+unexpected 'o'
+expecting integer

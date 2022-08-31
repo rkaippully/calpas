@@ -26,9 +26,12 @@ common common-settings
   default-extensions: DeriveAnyClass
                       DeriveGeneric
                       DerivingVia
+                      DerivingStrategies
+                      DuplicateRecordFields
                       FlexibleContexts
                       GeneralizedNewtypeDeriving
                       LambdaCase
+                      OverloadedLists
                       OverloadedStrings
                       RankNTypes
                       ScopedTypeVariables
@@ -49,26 +52,37 @@ common common-settings
                       -Wunused-packages
                       -Werror
                       -fshow-warning-groups
-  build-depends:      base ==4.16.3.0
+
+library                    
+  import:             common-settings
+  exposed-modules:    Prelude
+                    , Calpas.Compiler.Parser
+  hs-source-dirs:     lib
+  build-depends:      base-noprelude     ==4.13.0.0
+                    , case-insensitive   ==1.2.1.0
+                    , megaparsec         ==9.2.1
+                    , parser-combinators ==1.3.0
+                    , relude             ==1.1.0.0
+                    , scientific         ==0.3.7.0
 
 executable calpasc
   import:             common-settings
-  main-is:            Main.hs
-  other-modules:      Calpas.Compiler.Parser
   hs-source-dirs:     compiler
-  other-modules:      Paths_calpas
-  autogen-modules:    Paths_calpas
+  main-is:            Main.hs
+  build-depends:      calpas
   ghc-options:        -threaded
                       -rtsopts
                       -with-rtsopts=-N
-  build-depends:      megaparsec ==9.2.1
-                    , text ==1.2.5.0
 
 test-suite calpasc-test
   import:             common-settings
+                    , common-settings
   type:               exitcode-stdio-1.0
-  main-is:            Main.hs
   hs-source-dirs:     compiler-test
-  ghc-options:        -threaded
-                      -rtsopts
-                      -with-rtsopts=-N
+  main-is:            Main.hs
+  build-depends:      calpas
+                    , directory     ==1.3.6.2
+                    , filepath      ==1.4.2.2
+                    , pretty-simple ==4.0.0.0
+                    , tasty         ==1.4.2.3
+                    , tasty-golden  ==2.3.5

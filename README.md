@@ -11,3 +11,10 @@ compiles Pascal programs to JVM bytecode.
 $ calpasc PascalProg.pas    # Compile to PascalProg.class
 $ java PascalProg           # Run the program
 ```
+
+## Changes from Standard
+
+- Supports `(* *)` and `/* */` style comments
+- Record field lists can be empty and can have trailing semicolon for the field list before "end"
+- Case list elements can have a trailing semicolon before "end"
+- Procedures and functions as parameters are not supported

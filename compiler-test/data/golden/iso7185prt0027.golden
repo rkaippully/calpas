@@ -1,0 +1,6 @@
+compiler-test/data/golden/iso7185prt0027.pas:9:15:
+  |
+9 | type  integer char;
+  |               ^
+unexpected 'c'
+expecting '='
