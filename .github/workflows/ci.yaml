@@ -1,57 +1,36 @@
-name: Haskell CI
+name: CI
 
 on:
   push:
-    branches: [master]
+    branches:
+      - main
   pull_request:
-    branches: [master]
+    branches:
+      - main
 
 jobs:
-  stack-build:
-    name: Stack - os-${{ matrix.os }}
+  build:
+    name: ${{ matrix.os }}
 
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os:
           - ubuntu-latest
-          - macos-latest
-          - windows-latest
-        ghc:
-          - 8.8.4
 
     steps:
       - name: Checkout Source Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Setup Haskell Build Environment
-        uses: actions/setup-haskell@v1.1
+      - name: Install Nix
+        uses: cachix/install-nix-action@v17
+
+      - name: Set up Cachix
+        uses: cachix/cachix-action@v10
         with:
-          ghc-version: 8.8.4
-          enable-stack: true
+          name: rkaippully
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
 
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: .stack
-          key: ${{ runner.os }}-${{ matrix.ghc }}-${{ hashFiles('stack.yaml', 'calpas.cabal') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ matrix.ghc }}-
-
-      - name: Clean Cache
-        if: ${{ runner.os == 'macOS' }}
-        env:
-          STACK_ROOT: ${{ github.workspace }}/.stack
-        run: |
-          # Workaround for random errors on macos
-          rm -rf $STACK_ROOT/setup-exe-src $STACK_ROOT/setup-exe-cache
-
-      - name: Build
-        env:
-          STACK_ROOT: ${{ github.workspace }}/.stack
-        run: stack --system-ghc build --test --bench --no-run-tests --no-run-benchmarks
-
-      - name: Test
-        env:
-          STACK_ROOT: ${{ github.workspace }}/.stack
-        run: stack --system-ghc test
+      - name: Build Packages
+        run: nix build --print-build-logs --no-link

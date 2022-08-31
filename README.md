@@ -1,17 +1,15 @@
-# Calpas - A Pascal compiler and VM
+# Calpas - A Pascal compiler for JVM
 
-[![Hackage](https://img.shields.io/hackage/v/calpas)](https://hackage.haskell.org/package/calpas)
-[![Build Status](https://img.shields.io/github/workflow/status/rkaippully/calpas/Haskell%20CI/master)](https://github.com/rkaippully/calpas/actions?query=workflow%3A%22Haskell+CI%22+branch%3Amaster)
+[![Build Status](https://img.shields.io/github/workflow/status/rkaippully/calpas/CI/main)](https://github.com/rkaippully/calpas/actions?query=workflow%3A%22CI%22+branch%3Amain)
 
-Calpas is a compiler and virtual machine for [Pascal
-programs](https://en.wikipedia.org/wiki/Pascal_(programming_language)). Calpas implements the Pascal language as defined
-by [The Programming Language Pascal (Revised Report) 1973
-standard](https://www.research-collection.ethz.ch/handle/20.500.11850/68910) with some minimal extensions. It compiles
-Pascal programs to virtual machine p-code. The Calpas VM executes this p-code to run programs.
+Calpas is a [Pascal](https://en.wikipedia.org/wiki/Pascal_(programming_language)) compiler targeting the Java virtual
+machine. Calpas implements the Pascal language as defined by [ISO/IEC 7185:1990
+Pascal](https://web.archive.org/web/20160127044422/http://pascal-central.com/docs/iso7185.pdf) with some extensions. It
+compiles Pascal programs to JVM bytecode.
 
 ```shell
-$ calpasc -o test.cpc test.pas    # Compile to p-code
-$ calpas test.cpc                 # Run a program
+$ calpasc PascalProg.pas    # Compile to PascalProg.class
+$ java PascalProg           # Run the program
 ```
 
 ## Changes from Standard

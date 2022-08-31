@@ -924,5 +924,5 @@ programHeading = do
 
 parseFile :: FilePath -> IO (Either LText Program)
 parseFile f = do
-  s <- readFileText f
+  s <- decodeUtf8 <$> readFileBS f
   pure $ first (fromString . errorBundlePretty) $ parse program f s

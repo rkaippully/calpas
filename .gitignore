@@ -1,5 +1,6 @@
+dist-newstyle/
 .stack-work/
 .hie/
 *~
-
 compiler-test/data/golden/*.output
+private/
